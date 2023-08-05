@@ -28,8 +28,8 @@ class DBService:
 
     def add_todo(self, todo):
         self.cursor.execute(
-            "INSERT INTO todos (title, body, status) VALUES (?,?,?)",
-            (todo.title, todo.body, todo.status)
+            "INSERT INTO todos (title, body, status) VALUES (?,?,0)",
+            (todo.title, todo.body)
         )
         self.conn.commit()
 
