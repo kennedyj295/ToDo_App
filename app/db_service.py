@@ -23,10 +23,8 @@ class DBService:
         self.cursor = self.conn.cursor()
 
     def get_todos(self):
-        self.cursor.execute("SELECT * FROM todos")
-
-        for row in self.cursor.fetchall():
-            print(row)
+        todos = self.cursor.execute("SELECT * FROM todos")
+        return todos
 
     def add_todo(self, todo):
         self.cursor.execute(
@@ -40,9 +38,9 @@ class DBService:
         self.cursor.execute("DELETE FROM todos WHERE ID = " + str(todo_id))
         self.conn.commit()
 
-    def update_todo(self, status, todo_id):
+    def update_todo(self, todo, status):
         self.cursor.execute(
             "UPDATE todos SET status = ? WHERE id = ?",
-            (status, todo_id)
+            (status, todo.id)
         )
         self.conn.commit()
